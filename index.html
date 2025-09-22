@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #c2185b;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .secret-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #f8bbd9;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .secret-input:focus {
+            border-color: #c2185b;
+        }
+
+        .secret-input::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+
+        .enter-btn {
+            background: linear-gradient(135deg, #c2185b 0%, #ad1457 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .enter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(194, 24, 91, 0.3);
+        }
+
+        .enter-btn:active {
+            transform: translateY(0);
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .welcome-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #c2185b;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInWelcome 2s ease-in-out forwards;
+            z-index: 1000;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .container.fade-out {
+            animation: fadeOut 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeInWelcome {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .welcome-message {
+                font-size: 2rem;
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">TYPE CHIE (smol letter)</h1>
+        <div class="input-group">
+            <input type="text" class="secret-input" placeholder="TYPE MO. MHIEE">
+        </div>
+        <button class="enter-btn">Enter</button>
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        // Get DOM elements
+        const enterBtn = document.querySelector('.enter-btn');
+        const secretInput = document.querySelector('.secret-input');
+        const messageDiv = document.getElementById('message');
+        const container = document.querySelector('.container');
+
+        // Add click event listener to the Enter button
+        enterBtn.addEventListener('click', function() {
+            const userInput = secretInput.value.trim();
+
+            // Check if the password is correct
+            if (userInput === 'chie') {
+                // Hide the form container with fade out effect
+                container.classList.add('fade-out');
+
+                // Show welcome message after a short delay
+                setTimeout(() => {
+                    const welcomeDiv = document.createElement('div');
+                    welcomeDiv.className = 'welcome-message';
+                    welcomeDiv.textContent = 'Hiiiiiiiiiiiiiiiiiiiiiii!!!';
+                    document.body.appendChild(welcomeDiv);
+
+                    // Redirect to main navigation page after showing welcome message
+                    setTimeout(() => {
+                        window.location.href = 'main.html';
+                    }, 2000);
+                }, 1000);
+
+            } else {
+                // Show error message
+                messageDiv.textContent = '❌ Incorrect password. Access denied!';
+                messageDiv.className = 'message error';
+                messageDiv.style.display = 'block';
+
+                // Clear the input field
+                secretInput.value = '';
+
+                // Shake animation for error feedback
+                secretInput.style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => {
+                    secretInput.style.animation = '';
+                }, 500);
+            }
+        });
+
+        // Add Enter key support
+        secretInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                enterBtn.click();
+            }
+        });
+
+        // Shake animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

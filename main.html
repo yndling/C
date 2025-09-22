@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #c2185b;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            animation: titleBounce 1s ease-out 0.5s forwards;
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        @keyframes titleBounce {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            60% {
+                opacity: 0.8;
+                transform: translateY(5px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .heart {
+            color: #e91e63;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+            animation: navSlideIn 1s ease-out 1s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes navSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-item {
+            background: white;
+            border-radius: 25px;
+            padding: 15px 25px;
+            text-decoration: none;
+            color: #c2185b;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            animation: itemFloatIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .nav-item:nth-child(1) { animation-delay: 1.2s; }
+        .nav-item:nth-child(2) { animation-delay: 1.4s; }
+        .nav-item:nth-child(3) { animation-delay: 1.6s; }
+
+        @keyframes itemFloatIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .nav-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            background: #fff5f5;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #c2185b, #e91e63);
+            border-radius: 27px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-item:hover::before {
+            opacity: 0.3;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: contentFadeIn 1.5s ease-out 2s forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes contentFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #c2185b;
+            margin-bottom: 30px;
+            animation: titleReveal 1s ease-out 2.5s forwards;
+            opacity: 0;
+        }
+
+        @keyframes titleReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-text {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            animation: textFadeIn 1s ease-out 3s forwards;
+            opacity: 0;
+        }
+
+        @keyframes textFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .love-letter-icon {
+            color: #e91e63;
+            font-size: 1.5rem;
+            margin-right: 5px;
+        }
+
+        .music-icon {
+            color: #9c27b0;
+            font-size: 1.5rem;
+            margin-right: 5px;
+        }
+
+        .notes-icon {
+            color: #ff9800;
+            font-size: 1.5rem;
+            margin-right: 5px;
+        }
+
+        .photos-icon {
+            color: #4caf50;
+            font-size: 1.5rem;
+            margin-right: 5px;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-heart {
+            position: absolute;
+            color: #e91e63;
+            font-size: 2rem;
+            opacity: 0.2;
+            animation: heartFloat 6s linear infinite;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navigation {
+                gap: 15px;
+            }
+
+            .nav-item {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .main-content {
+                padding: 30px 20px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>FOR CHIEE<span class="heart"></span></h1>
+    </div>
+
+    <!-- Floating hearts background -->
+   
+
+    <nav class="navigation">
+        <a href="love-letter.html" class="nav-item">
+            <span class="love-letter-icon">✉️</span>
+        </a>
+        <a href="music.html" class="nav-item">
+            <span class="music-icon">🎵</span>Music
+        </a>
+
+        <a href="photos.html" class="nav-item">
+            <span class="photos-icon"></span> hmmmmmmm..🤔
+        </a>
+    </nav>
+
+    <div class="main-content">
+        <h2 class="section-title">HI, HELLLOO</h2>
+        <div class="content-text">
+            <p>I HOPE YOU LIKE IT MWEHEHEHHEHEHEHEHEHHEHE</p>
+
+        </div>
+    </div>
+
+    <script>
+        // Add interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click effect to main content
+            const mainContent = document.querySelector('.main-content');
+            mainContent.addEventListener('click', function() {
+                this.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+
+            // Add sparkle effect on hover for navigation items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.05)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-5px)';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
